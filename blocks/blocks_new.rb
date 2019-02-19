@@ -23,12 +23,15 @@ end
 
 [1,2,3].each {|number| puts "Number: #{number}"}
 
-def get_name
-  print "Enter your name: "
+def get_name(prompt, &block)
+  print prompt + ": "
   name = gets.chomp
-  yield name
+  block.call(name)
+  name
 end
 
-get_name do |name|
-  print "That's a cool name, #{name}!"
+name = get_name("Enter your name") do |your_name|
+  print "That's a cool name, #{your_name}!"
 end
+
+puts "My name is #{name}"
